@@ -1,6 +1,6 @@
 # Domain Response
 
-Domain Response is a tool that is designed to help you automate the investigation for a domain. This tool is specificly designed to automated phishing domain investigations. However it can be used for every domain to gather all domain information needed. This can help to classify if a domain is malicious. The script collects the following information in one go. 
+Domain Response is a tool that is designed to help you automate the investigation for a domain. This tool is specifically designed to automate phishing domain investigations. However, it can be used for every domain to gather all domain information needed. This can help to classify if a domain is malicious. The script collects the following information in one go.
 - WHOIS
 - Certificate
 - DNS Records
