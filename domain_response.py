@@ -75,7 +75,7 @@ def whois_information(domain):
         info = whois.whois(domain)
         print(info)
     except whois.parser.PywhoisError: 
-        print('No match for "TESTNOSDFSDFER.COM"')
+        print(f'No match for "{domain}"')
 
 # Query DNS data of the domain. It only queries for A, AAAA, NS, TXT, CNAME and MX records. Other can be added see: https://github.com/rthalley/dnspython/blob/master/dns/rdatatype.py#L248
 # THe DNS Resolver trows an error if no record exsists, this is catched by the exception in each for loop. 
