@@ -21,6 +21,7 @@ version = 1.1
 parser = argparse.ArgumentParser()
 parser.add_argument('-s', '--save', action='store_true', help='Save Output')
 parser.add_argument('-d', '--domain', dest='domain', type=str, help='Query domain')
+parser.add_argument('-sp', '--scan', action='store_true', help='Scan for default pages. This will send request to the suspicious domain and will disclose your IP address.')
 parser.parse_args()
 
 def banner():
@@ -66,7 +67,7 @@ def certficate_information(domain):
         print('Domain: %s Register Date: %s Issuer: %s'%(value['common_name'], datestring, value['issuer_name']))
         minimum_date = (datetime.now()-timedelta(days=var_certificate_recently_added))
         if(date > minimum_date):
-            print('[!] Recently added domain (less than 30 days).')
+            print('\033[91m[!] Recently added domain (less than 30 days).\033[0m')
 
 # Query the whois information of the domain.
 def whois_information(domain):
@@ -178,15 +179,17 @@ def main():
     if strip_domain(args.domain) != 0:
         target_domain = strip_domain(args.domain)
         if args.save:
-            fp = open(f"{target_domain}{'.txt'}", 'x')
+            fp = open(f"{target_domain}{'.txt'}", 'w')
             fp.close()
-            print('Output save name: %s.txt' %target_domain)
-            sys.stdout = Logger()       
+            print('Output save name: %s.txt (Full path: %s)' % (target_domain, os.path.abspath(f"{target_domain}.txt")))
+            sys.stdout = Logger()
         print("\n===== TARGET DOMAIN: {d} ===== \n".format(d=target_domain))
-        whois_information(target_domain) 
+        whois_information(target_domain)
         certficate_information(target_domain)
         dig(target_domain)
-        default_pages(target_domain)
+        # Only run default_pages if --scan is set
+        if args.scan:
+            default_pages(target_domain)
 main()
 
       
