@@ -13,7 +13,7 @@ import os
 # Variable to determine when a domain classifies as recent. Default is 30 days.
 var_certificate_recently_added = int(30)
 # Script version number
-version = 1.0
+version = 1.1
 
 ### Functions ###
 
@@ -48,7 +48,7 @@ def banner():
                             888                                          
                             888  
 Version %s                                                            
-Made by:
+Developed by: Bert-Jan Pals
 Twitter: @BertJanCyber, Github: Bert-JanP
     '''%version
     print(banner)
@@ -145,7 +145,7 @@ def default_pages(domain):
 
 # Strip the domain / url to get the valid domain. 
 def strip_domain(domain):
-    stripped = re.search("^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)", domain)
+    stripped = re.search(r"^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)", domain)
     if stripped:
         return stripped.group(1)
     print('[!] No Domain could be extracted, try again with a valid domain')
@@ -171,6 +171,10 @@ class Logger(object):
 def main():
     banner()
     args = parser.parse_args()
+    if not args.domain:
+        print("\033[91m[!] No domain provided. Please provide a domain with the -d or --domain argument.\033[0m")
+        print("\033[91m[!] You can run the script with 'python domain_response.py -h' to get help information.\033[0m")
+        return
     if strip_domain(args.domain) != 0:
         target_domain = strip_domain(args.domain)
         if args.save:
@@ -183,6 +187,6 @@ def main():
         certficate_information(target_domain)
         dig(target_domain)
         default_pages(target_domain)
-main()    
+main()
 
       
