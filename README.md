@@ -44,13 +44,13 @@ The script can be used with different input parameters.
 
 ```
 python.exe .\domain_response.py -h
-usage: domain_response.py [-h] [-s] [-d DOMAIN]
+usage: domain_response.py [-h] [-s] [-d DOMAIN] [-sp]
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -s, --save            Save Output
-  -d DOMAIN, --domain DOMAIN
-                        Query domain
+options:
+  -h, --help           show this help message and exit
+  -s, --save           Save Output
+  -d, --domain DOMAIN  Query domain
+  -sp, --scan          Scan for default pages. This will send request to the suspicious domain and will disclose your IP address.
 ```
 
 ### Select Target Domain
